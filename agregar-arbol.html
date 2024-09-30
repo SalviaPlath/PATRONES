@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbópolis - Agregar Árbol</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header, footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        nav a:hover {
+            color: #4CAF50;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .add-tree-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .add-tree-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+        }
+        .add-tree-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Agregar Árbol</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="mapa.html">Mapa de Árboles</a>
+    <a href="recompensas.html">Recompensas</a>
+    <a href="agregar-arbol.html">Agregar Árbol</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="retos.html">Retos</a>
+</nav>
+
+<section>
+    <form class="add-tree-form" id="form-agregar-arbol">
+        <label for="nombre-arbol">Nombre del Árbol:</label>
+        <input type="text" id="nombre-arbol" required placeholder="Nombre del árbol">
+
+        <label for="latitud">Latitud:</label>
+        <input type="number" id="latitud" step="0.0001" required placeholder="Latitud (ej. 4.6100)">
+
+        <label for="longitud">Longitud:</label>
+        <input type="number" id="longitud" step="0.0001" required placeholder="Longitud (ej. -74.0800)">
+
+        <button type="submit">Agregar Árbol</button>
+    </form>
+</section>
+
+<footer>
+    <p>Síguenos en nuestras redes sociales: <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
+    <p>&copy; 2024 Arbópolis Document</p>
+</footer>
+
+<script>
+    // Función para agregar un árbol al localStorage
+    document.getElementById('form-agregar-arbol').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        var nombreArbol = document.getElementById('nombre-arbol').value;
+        var latitud = parseFloat(document.getElementById('latitud').value);
+        var longitud = parseFloat(document.getElementById('longitud').value);
+
+        // Obtener árboles del localStorage
+        var arboles = JSON.parse(localStorage.getItem('arboles')) || [];
+        
+        // Agregar el nuevo árbol
+        arboles.push({ name: nombreArbol, lat: latitud, lng: longitud });
+        
+        // Guardar los árboles en localStorage
+        localStorage.setItem('arboles', JSON.stringify(arboles));
+
+        // Confirmar la adición y agregar puntos
+        alert("Árbol agregado: " + nombreArbol);
+
+        // Agregar puntos por agregar un árbol
+        var puntos = parseInt(localStorage.getItem('puntos')) || 0;
+        puntos += 10; // 10 puntos por agregar un árbol
+        localStorage.setItem('puntos', puntos); // Guardar en localStorage
+        
+        this.reset(); // Limpiar el formulario
+    });
+</script>
+
+</body>
+</html>

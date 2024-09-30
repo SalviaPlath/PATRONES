@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbópolis - Sistema de Recompensas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header, footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        nav a:hover {
+            color: #4CAF50;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .clear-button {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .clear-button:hover {
+            background-color: #d32f2f;
+        }
+        .reward {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sistema de Recompensas</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="mapa.html">Mapa de Árboles</a>
+    <a href="recompensas.html">Recompensas</a>
+    <a href="agregar-arbol.html">Agregar Árbol</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="retos.html">Retos</a>
+</nav>
+
+<section>
+    <h2>Puntos actuales: <span id="puntos">0</span></h2>
+    <h3>Metas de Puntos</h3>
+    <p>Acumula 50 puntos para recibir un certificado de participación.</p>
+    <p>Acumula 100 puntos para una mención en nuestras redes sociales.</p>
+
+    <h3>Recompensas</h3>
+    <div class="reward">
+        <strong>25 Puntos:</strong> Planta 1 árbol en una actividad comunitaria.
+    </div>
+    <div class="reward">
+        <strong>50 Puntos:</strong> Planta 5 árboles en un mes.
+    </div>
+    <div class="reward">
+        <strong>30 Puntos:</strong> Reporta el estado de 3 árboles.
+    </div>
+    <div class="reward">
+        <strong>20 Puntos:</strong> Asiste a 2 eventos de plantación.
+    </div>
+    <div class="reward">
+        <strong>40 Puntos:</strong> Realiza un taller de sensibilización sobre árboles.
+    </div>
+    <div class="reward">
+        <strong>60 Puntos:</strong> Organiza un evento de plantación como embajador.
+    </div>
+
+    <button class="clear-button" onclick="limpiarDatos()">Limpiar Datos</button> <!-- Botón para limpiar datos -->
+</section>
+
+<footer>
+    <p>Síguenos en nuestras redes sociales: <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
+    <p>&copy; 2024 Arbópolis Document</p>
+</footer>
+
+<script>
+    // Cargar puntos desde localStorage
+    var puntos = parseInt(localStorage.getItem('puntos')) || 0;
+
+    document.getElementById('puntos').innerText = puntos;
+
+    function aumentarPuntos(cantidad) {
+        puntos += cantidad; // Aumentar puntos
+        localStorage.setItem('puntos', puntos); // Guardar en localStorage
+        document.getElementById('puntos').innerText = puntos; // Actualizar en la interfaz
+        verificarMeta(); // Comprobar si se ha alcanzado una meta
+    }
+
+    function verificarMeta() {
+        if (puntos >= 50) {
+            alert("¡Felicidades! Has alcanzado 50 puntos y puedes recibir un certificado de participación.");
+        }
+        if (puntos >= 100) {
+            alert("¡Felicidades! Has alcanzado 100 puntos y recibirás una mención en nuestras redes sociales.");
+        }
+    }
+
+    // Función para limpiar datos
+    function limpiarDatos() {
+        localStorage.clear(); // Limpiar todos los datos
+        alert("Todos los datos han sido limpiados.");
+        document.getElementById('puntos').innerText = 0; // Reiniciar puntos
+    }
+</script>
+
+</body>
+</html>

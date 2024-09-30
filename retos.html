@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbópolis - Retos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header, footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        nav a:hover {
+            color: #4CAF50;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .reto {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .file-upload {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Participa en Retos</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="mapa.html">Mapa de Árboles</a>
+    <a href="recompensas.html">Recompensas</a>
+    <a href="agregar-arbol.html">Agregar Árbol</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="retos.html">Retos</a>
+</nav>
+
+<section>
+    <h2>Retos Disponibles</h2>
+    
+    <div class="reto">
+        <h3>Reto de Plantación</h3>
+        <p>Planta 1 árbol y gana 25 puntos.</p>
+        <button onclick="prepararReto('Plantación', 25)">Participar</button>
+        <div class="file-upload">
+            <input type="file" id="file-plantacion" accept="image/*">
+            <button onclick="subirArchivo('Plantación', 25, document.getElementById('file-plantacion').files)">Subir Prueba</button>
+        </div>
+    </div>
+    
+    <div class="reto">
+        <h3>Reto de Plantación Completo</h3>
+        <p>Planta 5 árboles en un mes y gana 50 puntos.</p>
+        <button onclick="prepararReto('Plantación Completo', 50)">Participar</button>
+        <div class="file-upload">
+            <input type="file" id="file-plantacion-completa" accept="image/*">
+            <button onclick="subirArchivo('Plantación Completo', 50, document.getElementById('file-plantacion-completa').files)">Subir Prueba</button>
+        </div>
+    </div>
+    
+    <div class="reto">
+        <h3>Reto de Reporte</h3>
+        <p>Reporta el estado de 3 árboles en una semana y gana 30 puntos.</p>
+        <button onclick="prepararReto('Reporte', 30)">Participar</button>
+        <div class="file-upload">
+            <input type="file" id="file-reporte" accept="image/*">
+            <button onclick="subirArchivo('Reporte', 30, document.getElementById('file-reporte').files)">Subir Prueba</button>
+        </div>
+    </div>
+    
+    <div class="reto">
+        <h3>Reto de Asistencia</h3>
+        <p>Asiste a 2 eventos de plantación y gana 20 puntos.</p>
+        <button onclick="prepararReto('Asistencia', 20)">Participar</button>
+        <div class="file-upload">
+            <input type="file" id="file-asistencia" accept="image/*">
+            <button onclick="subirArchivo('Asistencia', 20, document.getElementById('file-asistencia').files)">Subir Prueba</button>
+        </div>
+    </div>
+    
+    <div class="reto">
+        <h3>Reto de Taller</h3>
+        <p>Realiza un taller de sensibilización y gana 40 puntos.</p>
+        <button onclick="prepararReto('Taller', 40)">Participar</button>
+        <div class="file-upload">
+            <input type="file" id="file-taller" accept="image/*">
+            <button onclick="subirArchivo('Taller', 40, document.getElementById('file-taller').files)">Subir Prueba</button>
+        </div>
+    </div>
+    
+    <div class="reto">
+        <h3>Reto de Embajador</h3>
+        <p>Organiza un evento de plantación y gana 60 puntos.</p>
+        <button onclick="prepararReto('Embajador', 60)">Participar</button>
+        <div class="file-upload">
+            <input type="file" id="file-embajador" accept="image/*">
+            <button onclick="subirArchivo('Embajador', 60, document.getElementById('file-embajador').files)">Subir Prueba</button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>Síguenos en nuestras redes sociales: <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
+    <p>&copy; 2024 Arbópolis Document</p>
+</footer>
+
+<script>
+    var puntosAcumulados = {}; // Objeto para rastrear puntos por reto
+
+    function prepararReto(tipo, puntos) {
+        // Inicializar el rastreo de puntos para este reto
+        puntosAcumulados[tipo] = puntos;
+        alert("¡Te has inscrito en el reto de " + tipo + "! Suba su prueba.");
+    }
+
+    function subirArchivo(tipo, puntos, files) {
+        if (files.length > 0) {
+            // Aquí podrías manejar el archivo (subirlo a un servidor o procesarlo)
+            alert("Archivo para el reto de " + tipo + " ha sido subido exitosamente.");
+            
+            // Solo agregar puntos si el archivo es subido
+            var puntosActuales = parseInt(localStorage.getItem('puntos')) || 0;
+            puntosActuales += puntosAcumulados[tipo] || 0; // Sumar los puntos del reto
+            localStorage.setItem('puntos', puntosActuales); // Guardar en localStorage
+            alert("¡Has ganado " + puntos + " puntos por completar el reto de " + tipo + "!");
+            document.getElementById('puntos').innerText = puntosActuales; // Actualizar en la interfaz
+        } else {
+            alert("Por favor, selecciona un archivo antes de subir.");
+        }
+    }
+</script>
+
+</body>
+</html>
